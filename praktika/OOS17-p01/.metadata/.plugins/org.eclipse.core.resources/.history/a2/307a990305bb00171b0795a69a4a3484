@@ -1,0 +1,10 @@
+
+public class Aufgabe3 {
+
+	public static void main(String[] args) {
+		Geom[] geomObjekte = new Geom[4];
+		Point p = new Point(3, 5);
+		geomObjekte[0] = new KreisAgg(p, r)
+	}
+	
+}

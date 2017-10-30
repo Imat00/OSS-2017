@@ -1,0 +1,11 @@
+
+public class Aufgabe2 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		KreisVererb k = new KreisVererb(2, 3, 5.5);
+		
+		
+	}
+
+}

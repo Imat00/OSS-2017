@@ -1,0 +1,18 @@
+
+public class KreisAgg {
+	
+	/**
+	 * Attribut zur Speicherung der Kreisposition
+	 */
+	Point p;
+	
+	/**
+	 * Attribut zur Speicherung des Radius
+	 */
+	double r;
+	
+	void setRadius(double r) {
+		this.r = r;
+	}
+
+}

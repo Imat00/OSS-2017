@@ -1,0 +1,20 @@
+
+public class KreisVererb extends Point {
+
+	double r;
+	
+	KreisVererb() {
+		
+	}
+	
+	KreisVererb(KreisVererb k) {
+		this.x = k.x;
+		this.y = k.y;
+		this.r = k.r;
+	}
+	
+	KreisVererb(Point p, double r) {
+		
+	}
+	
+}

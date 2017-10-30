@@ -1,0 +1,35 @@
+
+public class Aufgabe3 {
+
+	public static void main(String[] args) {
+		
+		// Geom Array zur Speicherung von 4 verschiedenen Objekten
+		// die von Geom beerbt werden
+		Geom[] geomObjekte = new Geom[4];
+		
+		// Zwei Kreise erstellen und in Array speichern
+		Point p = new Point(3, 5);
+		geomObjekte[0] = new KreisAgg(p, 3);
+		p = new Point(6, 8);
+		geomObjekte[1] = new KreisAgg(p, 7);
+		
+		// Zwei Rechtecke erstellen und in Array speichern
+		Point p1 = new Point(5,5);
+		Point p2 = new Point(10,10);
+		geomObjekte[2] = new Rechteck(p1,p2);
+		
+		p1 = new Point(15,15);
+		p2 = new Point(10,10);
+		geomObjekte[3] = new Rechteck(p1,p2);
+		
+		double gesamtFlaeche = 0;
+		
+		for (int i = 0; i < geomObjekte.length; i++) {
+			gesamtFlaeche += geomObjekte[i].getSurface();
+		}
+		
+		System.out.println("Die Gesamte Fläche betragt: " + gesamtFlaeche);
+		
+	}
+	
+}

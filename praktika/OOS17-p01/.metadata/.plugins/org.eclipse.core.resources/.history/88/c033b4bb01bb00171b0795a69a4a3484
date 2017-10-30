@@ -1,0 +1,14 @@
+
+public class Rechteck {
+
+	/**
+	 * Attribut zur Speicherung des oberen rechten Punkt des Rechtecks
+	 */
+	Point p1;
+	
+	/**
+	 * Attribut zur Speicherung des unteren linken Punkt des Rechtecks
+	 */
+	Point p2;
+	
+}

@@ -1,0 +1,47 @@
+
+public class KreisAgg {
+	
+	/**
+	 * Attribut zur Speicherung der Kreisposition
+	 */
+	Point p;
+	
+	/**
+	 * Attribut zur Speicherung des Radius
+	 */
+	double r;
+	
+	void setRadius(double r) {
+		this.r = r;
+	}
+	
+	double getRadius() {
+		return r;
+	}
+	
+	double getSurface() {
+		return Math.PI * r * r;
+	}
+	
+	boolean equals(KreisAgg k) {
+		return (p == k.p && r == k.r);
+	}
+	
+	public String toString() {
+		return "[p=" + p + ", r=" + r + "]";
+	}
+	
+	Point getLocation() {
+		return p;
+	}
+	
+	void setLocation(Point p) {
+		this.p.x = p.x;
+		this.p.y = p.y;
+	}
+
+	void setLocation(int x, int y) {
+		this.p.x = x;
+		this.p.y = y;
+	}
+}
