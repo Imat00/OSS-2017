@@ -1,0 +1,7 @@
+package com.denis.benutzer;
+
+public interface BenutzerVerwaltung {
+	
+	void benutzerEintragen(Benutzer benutzer) throws BenutzerVorhandenException;
+	boolean benutzerOk(Benutzer benutzer);
+}

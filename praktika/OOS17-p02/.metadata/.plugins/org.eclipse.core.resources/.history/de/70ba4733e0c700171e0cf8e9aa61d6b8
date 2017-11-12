@@ -1,0 +1,19 @@
+package com.denis.benutzer;
+
+/**
+ * 
+ * <p>Überschrift: Struktur von ...</p>
+ * <p>Beschreibung: Diese Klasse definiert die grundlegende Struktur von Test.java.
+ * 					Die Sturktur eines Benutzers setzt sich zusammen aus:
+ *  					- ...
+ *  					Da es nur um eine Struktur geht, werden lediglich die beiden 
+ *  					Standardmethoden equals und toString implementiert.</p>
+ *  
+ * <p>Copyright: Denis (c) 2017</p>
+ * <p>Organisation: FH Aachen, FB05</p>
+ * @author Denis
+ *
+ */
+public class Test {
+
+}

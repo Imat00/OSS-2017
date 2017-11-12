@@ -1,0 +1,30 @@
+package com.denis.benutzer;
+import java.util.HashMap;
+
+public class BenutzerVerwaltungAdmin implements BenutzerVerwaltung {
+
+	HashMap<String,Benutzer> benutzer;
+	
+	public BenutzerVerwaltungAdmin() {
+		// TODO Auto-generated constructor stub
+		benutzer = new HashMap<>();
+	}
+	
+	
+	@Override
+	public void benutzerEintragen(Benutzer benutzer) throws BenutzerVorhandenException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean benutzerOk(Benutzer benutzer) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	public void benutzerLöschen(Benutzer benutzer) throws BenutzerVorhandenException {
+		
+	}
+	
+}

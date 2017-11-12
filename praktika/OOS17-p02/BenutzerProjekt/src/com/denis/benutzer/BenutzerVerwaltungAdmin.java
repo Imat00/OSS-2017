@@ -1,5 +1,73 @@
 package com.denis.benutzer;
+import java.util.HashMap;
 
+/**
+ * <p>Überschrift: BenutzerVerwaltungAdmin</p>
+ * <p>Beschreibung: Diese Klasse dient zur Verwaltung von Benutzern.
+ * 					Die Speicherung eines Benutzers wird durch:
+ * 					- benutzer HashMap realisiert.
+ * 					Zur Verwaltung der Benutzer werden die Methoden benutzerEintragen,
+ * 					benutzerOk, und benutzerLöschen implementiert.
+ * <p>Copyright: Denis Behrends (c) 2017</p>
+ * <p>Organisation: FH Aachen, FB05</p>
+ * @author Denis Behrends
+ *
+ */
 public class BenutzerVerwaltungAdmin implements BenutzerVerwaltung {
 
+	/**
+	 *  Attribut zur Speicherung der Benutzer
+	 */
+	HashMap<String,Benutzer> benutzer;
+	
+	/**
+	 *  Initialisiert benutzer für spätere Verwendung
+	 */
+	public BenutzerVerwaltungAdmin() {
+		benutzer = new HashMap<>();
+	}
+	
+	
+	/**
+	 *  Vererbte Methode aus {@link BenutzerVerwaltung}
+	 *  @param benutzer wird in die benutzer HashMap aufgenommen, 
+	 *  wenn noch nicht vorhanden
+	 *  @throws BenutzerVorhandenException beim Versuch bereit 
+	 *  existierende Nutzer hinzuzufügen! 
+	 */
+	@Override
+	public void benutzerEintragen(Benutzer benutzer) throws BenutzerVorhandenException {
+		if(!benutzerOk(benutzer)) {
+			this.benutzer.put(benutzer.userId, benutzer);
+		}
+		else {
+			throw new BenutzerVorhandenException("Dieser Benutzer existiert bereits!");
+		}
+	}
+
+	/**
+	 *  Vererbte Methode aus {@link BenutzerVerwaltung} zur Prüfung ob 
+	 *  benutzer bereits in HashMap eingetragen
+	 *  @param benutzer ist der Benutzer für den geprüft wird ob er schon vorhanden ist
+	 *  @return true, wenn benutzer den Benutzer schon enthält
+	 */
+	@Override
+	public boolean benutzerOk(Benutzer benutzer) {
+		return this.benutzer.containsValue(benutzer);
+	}
+	
+	/**
+	 * Methode um aus HashMap benutzer einen Benutzer zu entfernen
+	 * @param benutzer
+	 * @throws BenutzerVorhandenException
+	 */
+	public void benutzerLöschen(Benutzer benutzer) throws BenutzerVorhandenException {
+		if(benutzerOk(benutzer)) {
+			this.benutzer.remove(benutzer.userId);
+		}
+		else {
+			throw new BenutzerVorhandenException("Dieser Benutzer existiert nicht!");
+		}
+	}
+	
 }

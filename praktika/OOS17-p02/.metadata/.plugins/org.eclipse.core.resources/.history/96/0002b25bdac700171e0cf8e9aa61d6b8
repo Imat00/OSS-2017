@@ -1,0 +1,19 @@
+package com.denis.benutzer;
+
+public class BenutzerVerwaltungAdmin implements BenutzerVerwaltung {
+
+	@Override
+	public void benutzerEintragen(Benutzer benutzer) throws BenutzerVorhanden {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public boolean benutzerOk(Benutzer benutzer) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	
+	
+}

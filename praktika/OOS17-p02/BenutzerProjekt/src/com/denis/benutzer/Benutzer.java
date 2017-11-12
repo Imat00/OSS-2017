@@ -2,28 +2,55 @@ package com.denis.benutzer;
 import java.util.Arrays;
 
 /**
+ * <p>Überschrift: Struktur von Benutzern</p>
+ * <p>Beschreibung: Diese Klasse definiert die grundlegende Struktur von Benutzern.
+ * 					Die Sturktur eines Benutzers setzt sich zusammen aus:
+ * 					- der userId
+ * 					- dem passWort
+ * 					Da es nur um eine Struktur geht, werden lediglich die beiden 
+ * 					Standardmethoden equals und toString implementiert.</p>
  * 
- * @author denis
+ * <p>Copyright: Denis Behrends (c) 2017</p>
+ * <p>Organisation: FH Aachen, FB05</p>
+ * @author Denis Behrends
  *
  */
 public class Benutzer {
 
+	/**
+	 *  Attribut zur Speicherung der UserID:
+	 */
 	String userId;
+	
+	/**
+	 *  Attribut zur Speicherung der Passworts:
+	 */
 	char[] passWort;
 	
 	public Benutzer() {
 		
 	}
 	
-	Benutzer(String userId, char[] passWort) {
+	public Benutzer(String userId, String passWort) {
 		this.userId = userId;
-		this.passWort = passWort;
+		this.passWort = passWort.toCharArray();
 	}
 
+	/**
+	 *  Standardmethode
+	 *  Gibt das Aktuelle Objekt als String aus
+	 * 
+	 */
 	public String toString() {
 		return "Benutzer [userId=" + userId + ", passWort=" + Arrays.toString(passWort) + "]";
 	}
 
+	/**
+	 *  Standardmethode
+	 *  @param obj leidert das Objekt, dessen Inhalt/Attribute auf Gleichheit mit 
+	 *  den aktuellen Objekts vergleicht
+	 * 
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)

@@ -1,0 +1,9 @@
+package com.denis.benutzer;
+
+public class BenutzerVorhandenException extends Exception {
+
+	public BenutzerVorhanden(String s) {
+		super(s);
+	}
+	
+}

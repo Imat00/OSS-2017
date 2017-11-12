@@ -1,0 +1,24 @@
+import com.denis.benutzer.*;
+
+/**
+ * 
+ * <p>Überschrift: Hauptklasse Application</p>
+ * <p>Beschreibung: Diese Klasse dient zur Ausführung des Programms über die Methode main.</p>
+ *  
+ * <p>Copyright: Denis (c) 2017</p>
+ * <p>Organisation: FH Aachen, FB05</p>
+ * @author Denis
+ *
+ */
+public class Application {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		Benutzer b1 = new Benutzer();
+
+	}
+
+}
