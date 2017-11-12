@@ -1,0 +1,33 @@
+package listenNutzung;
+import linListe.*;
+
+public class ListenNutzung {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		MeineListe leer = new MeineListe();
+		
+		MeineListe liste123 = new MeineListe().vorhängen(3).vorhängen(2).vorhängen(1);
+		MeineListe liste133 = new MeineListe().vorhängen(3).vorhängen(3).vorhängen(1);
+		
+		System.out.println(append(leer,liste123));
+		System.out.println(attach(leer,3));
+	}
+
+	private static LinListe attach(MeineListe leer, int i) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private static LinListe append(LinListe linListe, MeineListe rechts) {
+		try {
+			return (append(linListe.tail(),rechts).vorhängen(linListe.head()));
+		} catch (IstLeerException e) {
+			return null;
+		}
+		
+		
+	}
+
+}
