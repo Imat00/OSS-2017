@@ -35,7 +35,7 @@ public class Benutzer {
 		this.userId = userId;
 		this.passWort = passWort.toCharArray();
 	}
-
+	
 	/**
 	 *  Standardmethode
 	 *  Gibt das Aktuelle Objekt als String aus
@@ -69,5 +69,5 @@ public class Benutzer {
 			return false;
 		return true;
 	}
-	
+
 }

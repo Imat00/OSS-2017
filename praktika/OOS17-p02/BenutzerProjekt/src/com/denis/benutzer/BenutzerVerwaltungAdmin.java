@@ -1,5 +1,6 @@
 package com.denis.benutzer;
 import java.util.HashMap;
+import java.lang.StringBuilder;
 
 /**
  * <p>Überschrift: BenutzerVerwaltungAdmin</p>
@@ -53,7 +54,7 @@ public class BenutzerVerwaltungAdmin implements BenutzerVerwaltung {
 	 */
 	@Override
 	public boolean benutzerOk(Benutzer benutzer) {
-		return this.benutzer.containsValue(benutzer);
+		return this.benutzer.containsKey(benutzer.userId);
 	}
 	
 	/**
@@ -68,6 +69,19 @@ public class BenutzerVerwaltungAdmin implements BenutzerVerwaltung {
 		else {
 			throw new BenutzerVorhandenException("Dieser Benutzer existiert nicht!");
 		}
+	}
+	
+	public String toString() {
+
+		StringBuilder ausgabe = new StringBuilder();
+		ausgabe.append("{\n");
+		Integer iterator = 0;
+		for(Benutzer b : this.benutzer.values()) {
+			ausgabe.append("\t" + b + (this.benutzer.size() - 1 == iterator ? "\n": ",\n"));
+			iterator++;
+		}
+		ausgabe.append("}");
+		return ausgabe.toString();
 	}
 	
 }

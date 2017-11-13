@@ -24,30 +24,27 @@ public class Application {
 		Benutzer b3 = new Benutzer("Fred", "passwort123");
 		Benutzer b4 = new Benutzer("Rick", "passwort123");
 		Benutzer b5 = new Benutzer("Rick", "passwort123");
+		Benutzer b6 = new Benutzer("Peter","123");
+		Benutzer b7 = new Benutzer();
 		
 		
 		try {
-			bva.benutzerEintragen(b1);
-			
-			if(bva.benutzerOk(b1)) {
-				bva.benutzerLöschen(b1);
-			}
 			
 			System.out.println("b1 gleich b2: " + b1.equals(b2));
+			System.out.println("b4 gleich b5: " + b4.equals(b5));
 			
+			bva.benutzerEintragen(b1);
 			bva.benutzerEintragen(b2);
 			bva.benutzerEintragen(b3);
 			bva.benutzerEintragen(b4);
-			
-			if(bva.benutzerOk(b4)) {
-				bva.benutzerLöschen(b4);
-			}
-			
-			System.out.println("b4 gleich b5: " + b4.equals(b5));
-			
+			bva.benutzerLöschen(b4);
+			bva.benutzerEintragen(b6);
 			bva.benutzerEintragen(b5);
+			System.out.println(bva);
+			bva.benutzerLöschen(b1);
+			System.out.println(bva);
 			
-
+			
 		} catch (BenutzerVorhandenException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
