@@ -1,0 +1,12 @@
+package application;
+
+import javafx.event.*;
+import javafx.fxml.*;
+import javafx.scene.control.*;
+import javafx.stage.*;
+
+public class LoginController {
+
+	private boolean neuAnmeldung = false;
+	
+}

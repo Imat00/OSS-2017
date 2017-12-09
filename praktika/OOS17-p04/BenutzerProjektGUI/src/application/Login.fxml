@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="319.0" prefWidth="428.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginController">
+   <children>
+      <Label layoutX="42.0" layoutY="35.0" text="Benutzerverwaltung">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="42.0" layoutY="101.0" text="UserID" />
+      <Label layoutX="42.0" layoutY="151.0" text="Passwort" />
+      <Label layoutX="42.0" layoutY="205.0" text="Neu-Anmeldung" />
+      <Button fx:id="btnAusfuehren" layoutX="42.0" layoutY="271.0" mnemonicParsing="false" onAction="#onBtnAusfuehrenClick" text="Ausführen" />
+      <CheckBox fx:id="cboxNeuAnmeldung" layoutX="178.0" layoutY="205.0" mnemonicParsing="false" onAction="#onCboxNeuAnmeldungClick" />
+      <TextField fx:id="txtUserId" layoutX="178.0" layoutY="97.0" />
+      <PasswordField fx:id="txtPasswort" layoutX="178.0" layoutY="147.0" />
+   </children>
+</AnchorPane>

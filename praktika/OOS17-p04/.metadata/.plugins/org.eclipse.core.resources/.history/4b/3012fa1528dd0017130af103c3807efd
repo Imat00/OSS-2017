@@ -1,0 +1,27 @@
+package application;
+
+import com.denis.benutzer.Benutzer;
+
+import javafx.event.*;
+import javafx.fxml.*;
+import javafx.scene.control.*;
+import javafx.stage.*;
+
+public class AnmeldungsController {
+
+	@FXML
+	Label lblErrorMessage;
+	
+	@FXML
+	TextField txtUsrID;
+	
+	@FXML
+	TextField txtPasswort;
+	
+	@FXML
+	TextField txtWiederholung;
+	
+	@FXML
+	Button btnAusfuehren;
+	
+}

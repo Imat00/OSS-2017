@@ -1,0 +1,14 @@
+package application;
+
+import javafx.fxml.*;
+import javafx.scene.control.*;
+
+public class AnwendungsController {
+	
+	@FXML
+	Label lblStartScreenBanner;
+
+	@FXML
+	Button btnCancel;
+	
+}

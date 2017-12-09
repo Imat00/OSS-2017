@@ -1,0 +1,36 @@
+package application;
+
+import javafx.event.*;
+import javafx.fxml.*;
+import javafx.scene.control.*;
+import javafx.stage.*;
+
+public class LoginController {
+
+	private boolean neuAnmeldung = false;
+	
+	@FXML
+	TextField txtUserId;
+	
+	@FXML
+	TextField txtPasswort;
+	
+	@FXML
+	CheckBox cboxNeuAnmeldung;
+	
+	@FXML
+	Button btnAusfuehren;
+	
+	@FXML
+	public void onCboxNeuAnmeldungClick(Event e){
+		neuAnmeldung = cboxNeuAnmeldung.isSelected();
+		System.out.println(neuAnmeldung);
+	}
+	
+	@FXML
+	public void onBtnAusfuehrenClick(Event e){
+		
+	}
+	
+	
+}

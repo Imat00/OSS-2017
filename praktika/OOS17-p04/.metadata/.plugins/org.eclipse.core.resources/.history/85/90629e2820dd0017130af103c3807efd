@@ -1,0 +1,26 @@
+package application;
+
+import javafx.event.*;
+import javafx.fxml.*;
+import javafx.scene.control.*;
+import javafx.stage.*;
+
+public class AnwendungsController {
+	
+	@FXML
+	Label lblStartScreenBanner;
+
+	@FXML
+	Stage window;
+	
+	@FXML
+	Button btnCancel;
+	
+	@FXML
+	public void onBtnCancelClick(Event e){
+		System.out.println("onBtnCancelClick ausgeführt!");
+		System.out.println("Fenster Anwendung wird geschlossen.");
+		
+	}
+	
+}
