@@ -179,5 +179,43 @@ public class BenutzerVerwaltungAdmin implements BenutzerVerwaltung {
 		return ausgabe;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null) {
+			throw new NullPointerException();
+		}
+		if (!(obj instanceof BenutzerVerwaltungAdmin))
+			return false;
+		BenutzerVerwaltungAdmin other = (BenutzerVerwaltungAdmin) obj;
+		if (benutzerTabelle == null) {
+			if (other.benutzerTabelle != null)
+				return false;
+		} else if (!benutzerTabelle.equals(other.benutzerTabelle))
+			return false;
+		if (dbiFile == null) {
+			if (other.dbiFile != null)
+				return false;
+		} 
+		if (dbiStream == null) {
+			if (other.dbiStream != null)
+				return false;
+		} 
+		if (dbname == null) {
+			if (other.dbname != null)
+				return false;
+		} 
+		if (dboFile == null) {
+			if (other.dboFile != null)
+				return false;
+		} 
+		if (dboStream == null) {
+			if (other.dboStream != null)
+				return false;
+		} 
+		return true;
+	}
+
 	
 }

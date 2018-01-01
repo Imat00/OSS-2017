@@ -1,0 +1,456 @@
+package com.denis.benutzer;
+import static org.junit.Assert.*;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.Hashtable;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+
+public class BenutzerVerwaltungAdminTest {
+
+	private Hashtable<String,Benutzer> benutzerTabelle;
+	private BenutzerVerwaltungAdmin bva;
+	private Benutzer b1;
+	private Benutzer b2;
+	private Benutzer b3;
+	private Benutzer b4;
+	private Benutzer b5;
+	private Benutzer b6;
+	private Benutzer b7;
+	
+	
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		
+	}
+
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+		
+	}
+
+	@Before
+	public void setUp() throws Exception {
+		
+		benutzerTabelle = new Hashtable<>();
+		bva = new BenutzerVerwaltungAdmin();
+		b1 = new Benutzer("Denis", "passwort123");
+		b2 = new Benutzer("Constantin", "passwort123");
+		b3 = new Benutzer("Fred", "passwort123");
+		b4 = new Benutzer("Rick", "passwort123");
+		b5 = new Benutzer("Rick2", "passwort123");
+
+		
+	}
+	
+	@After
+	public void tearDown() throws Exception {
+		File f = new File("Benutzer.DB");
+		if(f.exists()) {
+			f.delete();
+		}
+	}
+
+	@Test
+	public void testdbInitialisierenOhneInitialisierung() {
+
+		BenutzerVerwaltungAdmin bva2 = new BenutzerVerwaltungAdmin();
+		
+		// Initialisiere db-file erneut mit bva2
+		Benutzer b = new Benutzer("hallohallo","pw");
+		
+		try {
+
+			bva2.benutzerEintragen(b);
+
+		} catch (ClassNotFoundException | BenutzerVorhandenException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		assertTrue(bva.benutzerOk(b));
+		
+	}
+	
+	@Test
+	public void testdbInitialisierenNachBenutzerEintragen() {
+		
+		BenutzerVerwaltungAdmin bva2 = new BenutzerVerwaltungAdmin();
+		
+		// Initialisiere db-file erneut mit bva2
+		Benutzer b = new Benutzer("hallohallo","pw");
+		
+		try {
+			bva.dbInitialisieren();
+			bva2.dbInitialisieren();
+			bva2.benutzerEintragen(b);
+		
+		} catch (ClassNotFoundException | BenutzerVorhandenException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("Benutzer eintragen fehlgeschlagen!");
+		}
+		assertTrue(bva.benutzerOk(b));
+			
+		// erneut db-file initialisieren und prüfen ob an bva weiter gereicht wurde.
+		try {	
+			bva2.dbInitialisieren();
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("Initialisieren nach eintragen fehlgeschlagen!");
+		}
+		assertFalse(bva.benutzerOk(b));
+		
+		
+	}
+	
+	@Test
+	public void testdbInitialisierenEinzeln() {
+		
+		BenutzerVerwaltungAdmin bva2 = new BenutzerVerwaltungAdmin();
+		try {		
+			bva.dbInitialisieren();
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("Initialisierung fehlgeschlagen!");
+		}	
+		
+		// Initialisiere db-file erneut mit bva2 und prüfe ob Änderungen an bva weiter gereicht werden.
+		Benutzer b = new Benutzer("hallohallo","pw");
+		
+		try {
+		
+			bva2.benutzerEintragen(b);
+		
+		} catch (ClassNotFoundException | BenutzerVorhandenException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("Benutzer eintragen fehlgeschlagen!");
+		}
+		assertTrue(bva.benutzerOk(b));
+				
+	}
+	
+	@Test
+	public void testdbInitialisierenMerhfach() {
+		bva = new BenutzerVerwaltungAdmin();
+		BenutzerVerwaltungAdmin bva2 = new BenutzerVerwaltungAdmin();
+		try {		
+			bva.dbInitialisieren();
+			bva2.dbInitialisieren();
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("Doppelte Initialisierung fehlgeschlagen!");
+		}	
+		
+		// Initialisiere db-file erneut mit bva2 und prüfe ob Änderungen an bva weiter gereicht werden.
+		Benutzer b = new Benutzer("hallohallo","pw");
+		
+		try {
+		
+			bva2.benutzerEintragen(b);
+		
+		} catch (ClassNotFoundException | BenutzerVorhandenException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("Benutzer eintragen fehlgeschlagen!");
+		}
+		assertTrue(bva.benutzerOk(b));
+			
+		// erneut db-file initialisieren und prüfen ob an bva weiter gereicht wurde.
+		try {	
+			bva2.dbInitialisieren();
+		} catch (ClassNotFoundException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail("Initialisieren nach eintragen fehlgeschlagen!");
+		}
+		assertFalse(bva.benutzerOk(b));
+		
+		
+	}
+	
+	@Test
+	public void testleseDateiStream() throws ClassNotFoundException, IOException, BenutzerVorhandenException {
+		bva = new BenutzerVerwaltungAdmin();
+		bva.dbInitialisieren();
+		bva.benutzerEintragen(new Benutzer("hallo1","passwd"));
+		benutzerTabelle = bva.leseDateiStream();
+		assertTrue(benutzerTabelle.containsKey("hallo1"));
+	}
+	
+	@Test
+	public void testleseDateiStreamOhneInit() {
+		
+		BenutzerVerwaltungAdmin bvaF = new BenutzerVerwaltungAdmin();
+		
+		try {
+			bvaF.benutzerEintragen(new Benutzer("hallo1","passwd"));
+			benutzerTabelle = bvaF.leseDateiStream();
+		} catch (ClassNotFoundException | BenutzerVorhandenException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+	}
+	
+	@Test
+	public void testschreibeDateiStream() throws ClassNotFoundException, IOException, BenutzerVorhandenException {
+		
+		bva.dbInitialisieren();
+		bva.schreibeDateiStream();
+		b1 = new Benutzer("Denis", "passwort123");
+		bva.benutzerEintragen(b1);
+		bva.schreibeDateiStream();
+		bva.benutzerOk(b1);
+		
+		b2 = new Benutzer("test", "passwort123");
+		bva.benutzerEintragen(b2);
+		bva.benutzerOk(b2);
+		b3 = new Benutzer();
+		bva.benutzerEintragen(b3);
+		bva.schreibeDateiStream();
+		
+	}
+	
+	@Test
+	public void testKeinenBenutzerEintragen() {
+		
+		b6 = new Benutzer("Peter","123");
+		try {
+			bva.dbInitialisieren();
+			
+			assertFalse(bva.benutzerOk(b6));
+			fail("Benutzer exestiert nicht wurde aber von benutzerOk gefunden!");
+			
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
+	
+	}
+	
+	@Test
+	public void testBenutzerEintragen() {
+		
+		b6 = new Benutzer("Peter","123");
+		b7 = new Benutzer();
+		try {
+			bva.dbInitialisieren();
+
+			bva.benutzerEintragen(b6);
+			bva.benutzerEintragen(b7);
+		
+			assertTrue(bva.benutzerOk(b6));
+			assertTrue(bva.benutzerOk(b7));
+			
+		} catch (ClassNotFoundException | IOException | BenutzerVorhandenException e) {
+			e.printStackTrace();
+			fail("Benutzer eintragen fehlgeschlagen!");
+		}
+	
+	}
+
+	@Test
+	public void testBenutzerEintragenDoppelt() {
+
+		b6 = new Benutzer("Peter","123");
+		
+		try {		
+			
+			bva.benutzerEintragen(b6);
+			bva.benutzerEintragen(b6);
+			fail("Benutzer dopplet eingetragen!");
+			
+		} catch (ClassNotFoundException | IOException | BenutzerVorhandenException e1) {
+			e1.printStackTrace();
+		}
+		
+	}
+	
+	
+	@Test
+	public void testBenutzerOkTrue() {
+		
+		try {
+			bva.dbInitialisieren();
+			bva.benutzerEintragen(b1);
+			bva.benutzerEintragen(b2);
+			bva.benutzerEintragen(b3);
+			bva.benutzerEintragen(b4);
+			bva.benutzerEintragen(b5);
+		} catch (ClassNotFoundException | IOException | BenutzerVorhandenException e1) {
+			e1.printStackTrace();
+			fail("Benutzer eintragen fehlgeschlagen!");
+		}
+		
+		assertTrue(bva.benutzerOk(b1));
+		assertTrue(bva.benutzerOk(b2));
+		assertTrue(bva.benutzerOk(b3));
+		assertTrue(bva.benutzerOk(b4));
+		assertTrue(bva.benutzerOk(b5));
+		
+	}
+
+	@Test
+	public void testBenutzerOkFalse() {
+		
+		try {
+			bva.dbInitialisieren();
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+			fail("Initialisierung der db fehlgeschlagen!");
+		}
+		
+		assertFalse(bva.benutzerOk(new Benutzer("Name noch nicht vergeben","")));
+		
+	}
+
+	@Test
+	public void testBenutzerOkOhneParameter() {
+		
+		try {
+			bva.dbInitialisieren();
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+			fail("Initialisierung der db fehlgeschlagen!");
+		}
+
+		assertFalse(bva.benutzerOk(new Benutzer()));
+		
+	}
+	
+	@Test
+	public void testBenutzerLöschen() {
+		
+		
+		try {
+			bva.dbInitialisieren();
+			bva.benutzerEintragen(b1);
+			bva.benutzerEintragen(b2);
+			bva.benutzerEintragen(b3);
+			bva.benutzerEintragen(b4);
+			bva.benutzerEintragen(b5);
+		} catch (ClassNotFoundException | IOException | BenutzerVorhandenException e1) {
+			e1.printStackTrace();
+			fail("Benutzer eintragen fehlgeschlagen!");
+		}
+	
+	
+		
+		assertTrue(bva.benutzerOk(b1));
+		assertTrue(bva.benutzerOk(b2));
+		assertTrue(bva.benutzerOk(b3));
+		assertTrue(bva.benutzerOk(b4));
+		assertTrue(bva.benutzerOk(b5));
+		
+		try {
+			bva.benutzerLöschen(b1);
+			assertFalse(bva.benutzerOk(b1));		
+			bva.benutzerLöschen(b2);
+			assertFalse(bva.benutzerOk(b2));
+			bva.benutzerLöschen(b3);
+			assertFalse(bva.benutzerOk(b3));
+			bva.benutzerLöschen(b4);
+			assertFalse(bva.benutzerOk(b4));
+			bva.benutzerLöschen(b5);
+			assertFalse(bva.benutzerOk(b5));
+			
+		} catch (ClassNotFoundException | IOException | BenutzerVorhandenException e1) {
+			e1.printStackTrace();
+			fail("Benutzer löschen fehlgeschlagen!");
+		}
+
+
+	}
+	
+	@Test
+	public void testBenutzerLöschenNichtDaOhneNutzer() {
+	
+		BenutzerVerwaltungAdmin bvaOhneNutzer =  new BenutzerVerwaltungAdmin();
+		
+		
+		try {
+			
+			bvaOhneNutzer.dbInitialisieren();
+			
+			bvaOhneNutzer.benutzerLöschen(new Benutzer());
+			fail("Nicht eingetragener Benutzer kann nicht gelöscht werden.");
+		
+		} catch (ClassNotFoundException | BenutzerVorhandenException | IOException e) {
+
+		}
+		
+	}
+
+	@Test
+	public void testBenutzerLöschenNichtDaMitNutzern() {
+	
+		BenutzerVerwaltungAdmin bvaMitNutzern =  new BenutzerVerwaltungAdmin();
+
+		try {
+			bvaMitNutzern.dbInitialisieren();
+			bvaMitNutzern.benutzerEintragen(b1);
+			bvaMitNutzern.benutzerEintragen(b2);
+			bvaMitNutzern.benutzerEintragen(b3);
+			bvaMitNutzern.benutzerEintragen(b4);
+			bvaMitNutzern.benutzerLöschen(new Benutzer());
+			fail("Nicht eingetragener Benutzer kann nicht gelöscht werden.");
+		} catch (ClassNotFoundException | BenutzerVorhandenException | IOException e) {
+
+		}
+		
+	}
+	
+	@Test
+	public void testToStringMitNutzern() {
+		
+
+		try {
+			bva.dbInitialisieren();
+			bva.benutzerEintragen(b1);
+			bva.benutzerEintragen(b2);
+			bva.benutzerEintragen(b3);
+			bva.benutzerEintragen(b4);
+			bva.benutzerEintragen(b5);
+		} catch (ClassNotFoundException | BenutzerVorhandenException | IOException e) {
+			e.printStackTrace();
+			fail("Benutzer eintragen fehlgeschlagen!");
+		}
+		
+		assertEquals(bva.toString(), "[BenutzerVerwaltung Anzahl:5 {Denis=Benutzer [userId=Denis, passWort=[p, a, s, s, w, o, r, t, 1, 2, 3]], Rick2=Benutzer [userId=Rick2, passWort=[p, a, s, s, w, o, r, t, 1, 2, 3]], Fred=Benutzer [userId=Fred, passWort=[p, a, s, s, w, o, r, t, 1, 2, 3]], Rick=Benutzer [userId=Rick, passWort=[p, a, s, s, w, o, r, t, 1, 2, 3]], Constantin=Benutzer [userId=Constantin, passWort=[p, a, s, s, w, o, r, t, 1, 2, 3]]}]");
+	
+	}
+	
+	@Test
+	public void testToStringOhneNutzern() {
+		
+
+		try {
+			bva.dbInitialisieren();
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+			fail("Benutzer eintragen fehlgeschlagen!");
+		}
+		
+		assertEquals(bva.toString(), "[BenutzerVerwaltung Anzahl:0 {}]");
+	
+	}
+
+	@Test
+	public void testEquals() {
+		
+		assertFalse(bva.equals(new BenutzerVerwaltungAdminTest()));
+		assertTrue(bva.equals(bva));
+		
+	}
+
+}

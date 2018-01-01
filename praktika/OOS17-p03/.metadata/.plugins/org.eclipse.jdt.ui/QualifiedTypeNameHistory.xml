@@ -13,7 +13,8 @@
 <fullyQualifiedTypeName name="java.text.MessageFormat"/>
 <fullyQualifiedTypeName name="java.util.Hashtable"/>
 <fullyQualifiedTypeName name="org.junit.Test"/>
-<fullyQualifiedTypeName name="com.denis.benutzer.BenutzerVerwaltungAdmin"/>
 <fullyQualifiedTypeName name="com.denis.benutzer.Benutzer"/>
 <fullyQualifiedTypeName name="java.io.File"/>
+<fullyQualifiedTypeName name="com.denis.benutzer.BenutzerVerwaltungAdmin"/>
+<fullyQualifiedTypeName name="java.lang.NullPointerException"/>
 </qualifiedTypeNameHistroy>

@@ -66,26 +66,8 @@ public class BenutzerTest {
 	}
 
 	@Test
-	public void testBenutzerStringString() {
-		
-		b1 = new Benutzer("Denis", "passwort123");
-		b2 = new Benutzer("Constantin", "passwort123");
-		b3 = new Benutzer("Fred", "passwort123");
-		b4 = new Benutzer("Rick", "passwort123");
-		b5 = new Benutzer("Rick", "passwort123");
-		b6 = new Benutzer("Peter","123");
-
-	}
-
-	@Test
 	public void testToStringEquals() {
 		assertEquals(setb4.toString(), setb5.toString());
-		
-	}
-	
-	@Test
-	public void testToStringNotEquals() {
-		assertNotEquals(setb1.toString(), setb6.toString());
 		
 	}
 
