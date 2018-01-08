@@ -1,0 +1,16 @@
+package prak4serv;
+
+import java.io.*;
+import java.net.*;
+
+import prak4serv.com.denis.benutzer.BenutzerVerwaltungAdmin;
+
+public class ServerOrb {
+
+	public ServerOrb(BenutzerVerwaltungAdmin bva) throws IOException {
+		
+		ServerSocket server = new ServerSocket(4711);
+		
+	}
+
+}

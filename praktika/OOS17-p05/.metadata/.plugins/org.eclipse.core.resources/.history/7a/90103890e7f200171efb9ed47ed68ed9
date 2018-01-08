@@ -1,0 +1,189 @@
+package prak4serv.com.denis.benutzer;
+import prak4serv.com.denis.benutzer.*;
+import java.util.*;
+import prak4gemklassen.*;
+import java.io.*;
+
+/**
+ * <p>Überschrift: BenutzerVerwaltungAdmin</p>
+ * <p>Beschreibung: Diese Klasse dient zur Verwaltung von Benutzern.
+ * 					Die Speicherung eines Benutzers wird durch:
+ * 					- benutzer HashMap realisiert.
+ * 					Zur Verwaltung der Benutzer werden die Methoden benutzerEintragen,
+ * 					benutzerOk, und benutzerLöschen implementiert.
+ * <p>Copyright: Denis Behrends (c) 2017</p>
+ * <p>Organisation: FH Aachen, FB05</p>
+ * @author Denis Behrends
+ *
+ */
+public class BenutzerVerwaltungAdmin implements BenutzerVerwaltung {
+
+	/**
+	 *  Attribut zur Speicherung der Benutzer
+	 */
+	private Hashtable<String,Benutzer> benutzerTabelle = new Hashtable<>();
+
+	/**
+	 *  Attribut für Datenbank Datei Namen
+	 */
+	private final String dbname = "server/Benutzer.DB";
+	
+	/**
+	 *  Attribut zur Kommunikation der DB Datei
+	 */
+	private FileOutputStream dboFile;
+
+	/**
+	 *  Attribut zum Schreiben in DB Datei
+	 */
+	private ObjectOutputStream dboStream;
+
+	/**
+	 *  Attribut zur Kommunikation der DB Datei
+	 */
+	private FileInputStream dbiFile;
+
+	/**
+	 *  Attribut zum Schreiben in DB Datei
+	 */
+	private ObjectInputStream dbiStream;
+	
+	/**
+	 *  Initialisiert Datenbankdatei
+	 * @throws IOException 
+	 * @throws ClassNotFoundException 
+	 */
+	public BenutzerVerwaltungAdmin() {
+		
+		File f = new File(dbname);
+		if(!f.exists()) {
+			f.getParentFile().mkdirs();
+		} 
+	}
+	
+	/**
+	 * Liest die Daten in benutzerTabelle ein
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
+	public void dbInitialisieren() throws IOException, ClassNotFoundException {
+		
+		benutzerTabelle = new Hashtable<String, Benutzer>();
+		schreibeDateiStream();
+	}
+	
+	/**
+	 * Liest den Hashatble benuterTabelle aus ObjectInputStream aus.
+	 * Wenn Datei nicht existiert wird neue Datei geschrieben.
+	 * @return Gibt die ausgelesenen Daten zurück als Hashtable<String, Benutzer>
+	 * @throws ClassNotFoundException
+	 * @throws IOException
+	 */
+	public Hashtable<String, Benutzer> leseDateiStream() throws ClassNotFoundException, IOException {
+		
+		File f = new File(dbname);
+		if(!f.exists()) {
+			f.getParentFile().mkdirs();
+			schreibeDateiStream();
+		} 
+		dbiFile = new FileInputStream(dbname);
+		dbiStream = new ObjectInputStream(dbiFile);
+		Hashtable<String, Benutzer> readObject = (Hashtable<String, Benutzer>) dbiStream.readObject();
+		dbiStream.close();
+		dbiFile.close();		
+		return readObject;
+	}
+	
+	/**
+	 * Schreibt die benutzer Hashtable in den ObjectOutputStream
+	 * @throws IOException
+	 */
+	public void schreibeDateiStream() throws IOException {
+		
+		dboFile = new FileOutputStream(dbname);
+		dboStream = new ObjectOutputStream(dboFile);
+		dboStream.writeObject(benutzerTabelle);
+		dboStream.close();
+		dboFile.close();
+	}
+
+	/**
+	 *  Vererbte Methode aus {@link BenutzerVerwaltung}
+	 *  @param benutzer wird in die benutzer Hashtable aufgenommen, 
+	 *  wenn noch nicht vorhanden
+	 *  @throws BenutzerVorhandenException beim Versuch bereit 
+	 *  existierende Nutzer hinzuzufügen! 
+	 *  @throws IOException 
+	 *  @throws ClassNotFoundException 
+	 */
+	@Override
+	public void benutzerEintragen(Benutzer benutzer) throws BenutzerVorhandenException, IOException, ClassNotFoundException {
+		
+		benutzerTabelle = leseDateiStream();
+		
+		if(!benutzerOk(benutzer)) {
+			benutzerTabelle.put(benutzer.userId, benutzer);
+			schreibeDateiStream();
+		}
+		else {
+			throw new BenutzerVorhandenException("Dieser Benutzer existiert bereits!");
+		}
+	}
+
+	/**
+	 *  Vererbte Methode aus {@link BenutzerVerwaltung} zur Prüfung ob 
+	 *  benutzer bereits in Hashtable eingetragen
+	 *  @param benutzer ist der Benutzer für den geprüft wird ob er schon vorhanden ist
+	 *  @return true, wenn benutzerTabelle den Benutzer schon enthält
+	 * @throws IOException 
+	 * @throws ClassNotFoundException 
+	 */
+	@Override
+	public boolean benutzerOk(Benutzer benutzer) {
+		try {
+			benutzerTabelle = leseDateiStream();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return benutzerTabelle.get(benutzer.userId).equals(benutzer);
+	}
+	
+	/**
+	 * Methode um aus HashMap benutzer einen Benutzer zu entfernen
+	 * @param benutzer
+	 * @throws BenutzerVorhandenException
+	 * @throws IOException 
+	 * @throws ClassNotFoundException 
+	 */
+	public void benutzerLöschen(Benutzer benutzer) throws BenutzerVorhandenException, ClassNotFoundException, IOException {
+		
+		benutzerTabelle = leseDateiStream();
+
+		if(benutzerOk(benutzer)) {
+			benutzerTabelle.remove(benutzer.userId);
+			schreibeDateiStream();
+		}
+		else {
+			throw new BenutzerVorhandenException("Dieser Benutzer existiert nicht!");
+		}
+	}
+	
+	/**
+	 * Methode zur Ausgabe von Benuzterverwaltung.
+	 * Gibt die in benutzerTabelle enthaltenen Benutzer und die Anzahl aus. 
+	 */
+	public String toString() {
+
+		String ausgabe = "[BenutzerVerwaltung "
+					+	"Anzahl:" + benutzerTabelle.size()
+					+	" " + benutzerTabelle
+					+	"]";
+		return ausgabe;
+	}
+
+	
+}

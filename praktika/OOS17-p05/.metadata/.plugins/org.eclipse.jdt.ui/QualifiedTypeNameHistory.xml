@@ -1,2 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<qualifiedTypeNameHistroy/>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="com.denis.benutzer.BenutzerVerwaltungAdmin"/>
+<fullyQualifiedTypeName name="java.io.BufferedReader"/>
+<fullyQualifiedTypeName name="java.io.InputStreamReader"/>
+<fullyQualifiedTypeName name="com.denis.benutzer.Benutzer"/>
+<fullyQualifiedTypeName name="application.MainApplication"/>
+<fullyQualifiedTypeName name="application.AnmeldungsController"/>
+<fullyQualifiedTypeName name="application.LoginController"/>
+<fullyQualifiedTypeName name="application.AnwendungsController"/>
+<fullyQualifiedTypeName name="prak4gemklassen.BenutzerVorhandenException"/>
+<fullyQualifiedTypeName name="java.net.Socket"/>
+<fullyQualifiedTypeName name="java.lang.Object"/>
+<fullyQualifiedTypeName name="java.io.ObjectOutputStream"/>
+<fullyQualifiedTypeName name="prak4serv.Server"/>
+<fullyQualifiedTypeName name="prak4serv.ServerOrb"/>
+<fullyQualifiedTypeName name="java.net.ServerSocket"/>
+<fullyQualifiedTypeName name="java.lang.ClassNotFoundException"/>
+<fullyQualifiedTypeName name="prak4gemklassen.Benutzer"/>
+<fullyQualifiedTypeName name="prak4serv.com.denis.benutzer.BenutzerVerwaltungAdmin"/>
+<fullyQualifiedTypeName name="org.junit.Assert"/>
+<fullyQualifiedTypeName name="prak4client.ClientOrb"/>
+<fullyQualifiedTypeName name="prak4client.com.denis.benutzer.BenutzerVerwaltungAdmin"/>
+<fullyQualifiedTypeName name="prak4client.com.denis.benutzer.BenutzerVerwaltung"/>
+</qualifiedTypeNameHistroy>

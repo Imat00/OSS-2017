@@ -1,0 +1,43 @@
+package prak4serv;
+
+import java.io.*;
+import java.net.*;
+
+import prak4gemklassen.Benutzer;
+import prak4serv.com.denis.benutzer.BenutzerVerwaltungAdmin;
+
+public class ServerOrb {
+
+	public ServerOrb(BenutzerVerwaltungAdmin bva) throws IOException {
+		
+		ServerSocket server = new ServerSocket(4711);
+		// Warten auf Verbindungsaufnahme durch Client:
+		while ( true ) {
+		
+			Socket client = server.accept();
+			// Verbindung annehmen und korresp. Streams erzeugen:
+			ObjectInputStream in = new ObjectInputStream(client.getInputStream());
+			ObjectOutputStream out = new ObjectOutputStream(client.getOutputStream());
+		
+			// Lesen der Methodenkodierung:
+			String methode = (String) in.readObject();
+			
+			// Lesen des Parameters:
+			Benutzer ben = (Benutzer) in.readObject();
+			
+			// Methodenimplementierungen durch Delegation an
+			// Dienstanbieterobjekt:
+			if (methode == "benutzerOk") {
+			out.writeBoolean(bva.benutzerOk(ben));
+			}
+			if (methode == "benutzerEintragen") {
+			out.writeInt(malNehmer.mal3(par));
+			}
+			// Sicherstellen, dass Ergebnis transportiert wird:
+			out.flush();
+		
+		}
+		
+	}
+
+}

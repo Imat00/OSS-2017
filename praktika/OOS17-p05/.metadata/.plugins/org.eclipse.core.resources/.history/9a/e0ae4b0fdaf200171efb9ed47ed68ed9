@@ -1,0 +1,11 @@
+package prak4serv;
+
+import prak4serv.com.denis.benutzer.BenutzerVerwaltungAdmin;
+
+public class ServerOrb {
+
+	public ServerOrb(BenutzerVerwaltungAdmin bva) {
+		// TODO Auto-generated constructor stub
+	}
+
+}

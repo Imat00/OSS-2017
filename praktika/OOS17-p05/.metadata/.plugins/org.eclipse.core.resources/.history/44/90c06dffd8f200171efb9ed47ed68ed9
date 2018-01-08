@@ -1,0 +1,16 @@
+package prak4serv;
+
+import prak4serv.com.denis.benutzer.BenutzerVerwaltungAdmin;
+
+public class Server {
+
+	public Server(){
+		BenutzerVerwaltungAdmin bva = new BenutzerVerwaltungAdmin();
+		ServerOrb so = new ServerOrb();
+	}
+	
+	public static void main(String[] args) {
+		Server s = new Server();
+	}
+	
+}

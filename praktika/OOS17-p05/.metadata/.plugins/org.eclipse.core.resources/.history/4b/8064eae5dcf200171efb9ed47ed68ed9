@@ -1,0 +1,55 @@
+package prak4client;
+
+import java.io.*;
+import java.net.*;
+import prak4gemklassen.*;
+
+public class ClientOrb {
+
+	private String address;
+	
+	private int port;
+	
+	public ClientOrb(String address, int port){
+		this.address = address;
+		this.port = port;
+	}
+	
+	public ClientOrb() {
+		this.address = "localhost";
+		this.port = 3395;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+	public void setPort(int port) {
+		this.port = port;
+	}
+	
+	public String benutzerEintragen(Benutzer ben) throws BenutzerVorhandenException, IOException, ClassNotFoundException {
+		Socket server = new Socket(address, port);
+		ObjectOutputStream out =  new ObjectOutputStream(server.getOutputStream());
+		ObjectInputStream in =  new ObjectInputStream(server.getInputStream());
+		out.writeChars("benutzerEintragen");
+		out.writeObject(ben);
+		out.flush();
+		
+		String response = in.readObject().toString();
+		server.close();
+		return response;
+	}
+
+	public boolean benutzerOk(Benutzer ben) throws IOException, ClassNotFoundException {
+		Socket server = new Socket(address, port);
+		ObjectOutputStream out =  new ObjectOutputStream(server.getOutputStream());
+		ObjectInputStream in =  new ObjectInputStream(server.getInputStream());
+		out.writeChars("benutzerOk");
+		out.writeObject(ben);
+		out.flush();
+		boolean response = in.readBoolean();
+		server.close();
+		return response;
+	}
+}

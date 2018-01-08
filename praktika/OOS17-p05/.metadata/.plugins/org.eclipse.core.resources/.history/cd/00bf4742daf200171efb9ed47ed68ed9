@@ -1,0 +1,15 @@
+package prak4serv;
+
+import java.net.*;
+
+import prak4serv.com.denis.benutzer.BenutzerVerwaltungAdmin;
+
+public class ServerOrb {
+
+	public ServerOrb(BenutzerVerwaltungAdmin bva) {
+		
+		ServerSocket server = new ServerSocket(4711);
+		
+	}
+
+}

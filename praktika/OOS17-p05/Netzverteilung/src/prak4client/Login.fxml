@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="409.0" prefWidth="428.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prak4client.LoginController">
+   <children>
+      <Label layoutX="42.0" layoutY="35.0" text="Benutzerverwaltung">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="42.0" layoutY="136.0" text="UserID" />
+      <Label layoutX="42.0" layoutY="180.0" text="Passwort" />
+      <Label layoutX="42.0" layoutY="221.0" text="Neu-Anmeldung" />
+      <Button fx:id="btnAusfuehren" layoutX="42.0" layoutY="352.0" mnemonicParsing="false" onAction="#onBtnAusfuehrenClick" text="Ausführen" />
+      <CheckBox fx:id="cboxNeuAnmeldung" layoutX="178.0" layoutY="221.0" mnemonicParsing="false" onAction="#onCboxNeuAnmeldungClick" />
+      <TextField fx:id="txtUserId" layoutX="178.0" layoutY="132.0" onInputMethodTextChanged="#ontxtPasswortChange" />
+      <PasswordField fx:id="txtPasswort" layoutX="178.0" layoutY="176.0" onInputMethodTextChanged="#ontxtPasswortChange" />
+      <Label fx:id="lblErrorMessage" layoutX="42.0" layoutY="82.0" prefHeight="17.0" prefWidth="285.0" textFill="RED" visible="false" />
+      <CheckBox fx:id="cboxRemote" layoutX="178.0" layoutY="257.0" mnemonicParsing="false" onAction="#onCboxRemoteClick" />
+      <Label layoutX="43.0" layoutY="257.0" text="Remote" />
+      <TextField fx:id="txtRemoteAdresse" disable="true" layoutX="178.0" layoutY="298.0" onKeyTyped="#ontxtAddresseChange" />
+      <Label layoutX="45.0" layoutY="302.0" prefHeight="17.0" prefWidth="71.0" text="Addresse" />
+   </children>
+</AnchorPane>

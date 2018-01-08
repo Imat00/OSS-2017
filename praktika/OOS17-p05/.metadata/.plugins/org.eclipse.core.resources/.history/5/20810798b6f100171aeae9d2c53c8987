@@ -1,0 +1,15 @@
+package prak4client;
+
+import java.net.*;
+import prak4gemklassen.*;
+
+public class ClientOrb {
+
+	public ClientOrb(){
+		
+	}
+	
+	public void benutzerEintragen(Benutzer ben) throws BenutzerVorhandenException {
+		Socket server = new Socket(host, port);
+	}
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="339.0" prefWidth="383.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prak4client.AnmeldungsController">
+   <children>
+      <Button fx:id="btnAusfuehren" layoutX="14.0" layoutY="260.0" mnemonicParsing="false" onAction="#onBtnAusfuehrenClick" text="Ausführen" />
+      <Label layoutX="14.0" layoutY="35.0" text="Neu-Anmeldung">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="117.0" text="UserID" />
+      <Label layoutX="14.0" layoutY="163.0" text="Passwort" />
+      <Label layoutX="14.0" layoutY="208.0" text="Wiederholung" />
+      <Label fx:id="lblErrorMessage" layoutX="14.0" layoutY="74.0" text="Passwort != Wiederholung" textFill="#e30000" visible="false">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtUsrID" layoutX="165.0" layoutY="113.0" />
+      <PasswordField fx:id="txtPasswort" layoutX="165.0" layoutY="159.0" onKeyTyped="#ontxtPasswortChange" />
+      <PasswordField fx:id="txtWiederholung" layoutX="165.0" layoutY="204.0" onKeyTyped="#ontxtPasswortChange" />
+   </children>
+</AnchorPane>

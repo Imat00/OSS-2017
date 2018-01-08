@@ -1,0 +1,23 @@
+package prak4client;
+
+import java.io.*;
+import java.net.*;
+import prak4gemklassen.*;
+
+public class ClientOrb {
+
+	public ClientOrb(){
+		
+	}
+	
+	public void benutzerEintragen(Benutzer ben) throws BenutzerVorhandenException, UnknownHostException, IOException, ClassNotFoundException {
+		Socket server = new Socket("localhost", 3320);
+		ObjectOutputStream out =  new ObjectOutputStream(server.getOutputStream());
+		ObjectInputStream in =  new ObjectInputStream(server.getInputStream());
+		out.writeChars("benutzerEintragen");
+		out.writeObject(ben);
+		out.flush();
+		
+		String response = in.readObject().toString();
+	}
+}

@@ -1,0 +1,80 @@
+package prak4serv;
+
+import static org.junit.Assert.*;
+
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import prak4gemklassen.Benutzer;
+import prak4gemklassen.BenutzerVorhandenException;
+import prak4serv.com.denis.benutzer.BenutzerVerwaltungAdmin;
+
+public class ServerOrbTest {
+
+	static Server server;
+	
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		server = new Server();
+	}
+
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+	}
+
+	@Before
+	public void setUp() throws Exception {
+		BenutzerVerwaltungAdmin bvaServer = new BenutzerVerwaltungAdmin();
+		bvaServer.dbInitialisieren();
+	}
+
+	@After
+	public void tearDown() throws Exception {
+	}
+
+	@Test
+	public void testBenutzerEintragen() {
+		Benutzer ben = new Benutzer("denis", "test");
+		Socket server;
+		ObjectOutputStream out;
+		ObjectInputStream in;
+		try {
+			server = new Socket("localhost", 4711);
+			out =  new ObjectOutputStream(server.getOutputStream());
+			in = new ObjectInputStream(server.getInputStream());
+			out.writeObject("benutzerEintragen");
+			out.writeObject(ben);
+			out.flush();
+			
+			String response = in.readObject().toString();
+			server.close();
+
+			if(response.equals("BenutzerVorhandenException")) {
+				fail("Server hat keinen Benutzer gepeichert!");
+			}
+			assertEquals(response, "Benutzer remote eintragen erfolgreich.");
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			fail("Server kann nicht erreicht werden!");
+			e.printStackTrace();
+		}
+
+
+	}
+
+	@Test
+	public void testBenutzerOk() {
+		fail("Not yet implemented");
+	}
+	
+}

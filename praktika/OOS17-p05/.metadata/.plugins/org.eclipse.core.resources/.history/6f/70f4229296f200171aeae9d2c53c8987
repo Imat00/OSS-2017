@@ -1,0 +1,143 @@
+package prak4client;
+
+import java.io.*;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
+import javafx.scene.*;
+import prak4gemklassen.*;
+import prak4client.com.denis.benutzer.*;
+
+
+public class Client extends Application {
+	
+	private Stage refStage;
+	
+	private LoginController lc;
+	
+	private AnmeldungsController ac;
+	
+	private AnwendungsController awc;
+	
+	private ClientOrb co;
+	
+	public Client() {
+		co = new ClientOrb();
+	}
+	
+	@Override
+	public void start(Stage primaryStage) {
+		refStage = primaryStage;
+		
+		
+		//1. Erzeugung eines Objekts der Klasse BenutzerVerwaltungAdmin.
+		BenutzerVerwaltungAdmin bva = new BenutzerVerwaltungAdmin();
+		
+		//2. Anfrage an den Benutzer, ob die Datenhaltung initialisiert werden soll
+		System.out.println("dbInitialisieren(1/0):");
+		BufferedReader din = new BufferedReader(new InputStreamReader(System.in));
+		try {
+			int dbInitialisieren = Integer.parseInt(din.readLine());
+			if(dbInitialisieren == 1) {
+				bva.dbInitialisieren();
+				System.out.println("Initialisiere Benutzer.DB Datei...");
+			} else if(dbInitialisieren == 0) {
+				System.out.println("Initialisierung übersprungen");
+			}
+		} catch (NumberFormatException | IOException | ClassNotFoundException e1) {
+			e1.printStackTrace();
+		}
+				
+		//3. Erzeugung einer LoginScene mit Übergabe der eigenen Referenz an deren Controller			
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+			Parent root = loader.load();
+			lc = loader.getController();
+			lc.setORB(this);
+			refStage.setTitle("Benutzerverwaltung - Login");
+			refStage.setScene(new Scene(root));
+			refStage.show();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	void neuAnmeldungLokal() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("Anmeldung.fxml"));
+			Parent root = loader.load();
+			ac = loader.getController();
+			ac.setORB(this);
+			refStage.setTitle("Benutzerverwaltung - Anmeldung");
+			refStage.setScene(new Scene(root));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	void neuAnmeldungRemote() {
+		try {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("Anmeldung.fxml"));
+			Parent root = loader.load();
+			ac = loader.getController();
+			ac.setORB(this);
+			refStage.setTitle("Benutzerverwaltung - Anmeldung");
+			refStage.setScene(new Scene(root));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	void neuerBenutzer(Benutzer benutzer){
+		BenutzerVerwaltungAdmin bva = new BenutzerVerwaltungAdmin();
+		
+		try {
+			bva.benutzerEintragen(benutzer);
+
+			try {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("Login.fxml"));
+				Parent root = loader.load();
+				lc = loader.getController();
+				lc.setORB(this);
+				refStage.setTitle("Benutzerverwaltung - Login");
+				refStage.setScene(new Scene(root));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+			ac.showErrorMessage("Ein Fehler ist aufgetreten!");
+		} catch (BenutzerVorhandenException e) {
+			e.printStackTrace();
+			ac.showErrorMessage("Der Benutzer existiert bereits!");
+		} 
+	}
+	
+	public void benutzerLogin(Benutzer ben) {
+		BenutzerVerwaltungAdmin bva = new BenutzerVerwaltungAdmin();
+		if(bva.benutzerOk(ben)) {
+			try {
+				FXMLLoader loader = new FXMLLoader(getClass().getResource("Anwendung.fxml"));
+				Parent root = loader.load();
+				awc = loader.getController();
+				awc.setORB(this);
+				refStage.setTitle("Benutzerverwaltung - Anwendung");
+				refStage.setScene(new Scene(root));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			lc.showErrorMessage("Benutzer ist nicht vorhanden!");
+		}
+		System.out.println(ben);
+	}
+	
+	public static void main(String[] args) {
+		launch(args);
+	}
+
+}

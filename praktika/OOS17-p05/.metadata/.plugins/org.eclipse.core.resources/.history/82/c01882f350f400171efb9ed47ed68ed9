@@ -1,0 +1,60 @@
+package prak4serv;
+
+import static org.junit.Assert.*;
+
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+
+import org.junit.After;
+import org.junit.AfterClass;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import prak4gemklassen.BenutzerVorhandenException;
+
+public class ServerOrbTest {
+
+	static Server server;
+	
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		server = new Server();
+	}
+
+	@AfterClass
+	public static void tearDownAfterClass() throws Exception {
+	}
+
+	@Before
+	public void setUp() throws Exception {
+	}
+
+	@After
+	public void tearDown() throws Exception {
+	}
+
+	@Test
+	public void testBenutzerEintragen() {
+		Socket server = new Socket(address, port);
+		ObjectOutputStream out =  new ObjectOutputStream(server.getOutputStream());
+		ObjectInputStream in =  new ObjectInputStream(server.getInputStream());
+		out.writeObject("benutzerEintragen");
+		out.writeObject(ben);
+		out.flush();
+		
+		String response = in.readObject().toString();
+		server.close();
+		if(response.equals("BenutzerVorhandenException")) {
+			throw new BenutzerVorhandenException("Dieser Benutzer existiert bereits!");
+		}
+		return response;
+	}
+
+	@Test
+	public void testBenutzerOk() {
+		fail("Not yet implemented");
+	}
+	
+}

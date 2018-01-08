@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move element &apos;Benutzer.java&apos; to &apos;Netzverteilung/src/prak4client&apos;&#x0D;&#x0A;- Original project: &apos;lokaleNutzerverwaltung&apos;&#x0D;&#x0A;- Destination element: &apos;Netzverteilung/src/prak4client&apos;&#x0D;&#x0A;- Original element: &apos;com.denis.benutzer.Benutzer.java&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move compilation unit" destination="=Netzverteilung/src&lt;prak4client" element1="/src&lt;com.denis.benutzer{Benutzer.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" patterns="*" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1514892958346" units="1" version="1.0"/>
+</session>

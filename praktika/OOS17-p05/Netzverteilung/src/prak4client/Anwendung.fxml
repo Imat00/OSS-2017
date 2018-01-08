@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="400.0" maxWidth="700.0" prefHeight="178.0" prefWidth="432.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="prak4client.AnwendungsController">
+   <children>
+      <Label fx:id="lblStartScreenBanner" alignment="CENTER" contentDisplay="CENTER" layoutX="47.0" layoutY="36.0" prefHeight="27.0" prefWidth="338.0" text="Sie können das System nun verwenden" textAlignment="CENTER" AnchorPane.leftAnchor="47.0" AnchorPane.rightAnchor="47.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnCancel" cancelButton="true" layoutX="14.0" layoutY="139.0" mnemonicParsing="false" onAction="#onBtnCancelClick" text="Abbrechen" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" />
+   </children>
+</AnchorPane>

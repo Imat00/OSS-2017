@@ -1,0 +1,58 @@
+package prak4client;
+
+import javafx.event.*;
+import javafx.fxml.*;
+import javafx.scene.control.*;
+import prak4gemklassen.*;
+
+public class LoginController {
+
+	private boolean neuAnmeldung = false;
+	
+	@FXML
+	Label lblErrorMessage;
+	
+	@FXML
+	TextField txtUserId;
+	
+	@FXML
+	PasswordField txtPasswort;
+	
+	@FXML
+	CheckBox cboxNeuAnmeldung;
+	
+	@FXML
+	Button btnAusfuehren;
+
+	Client refMainApplication;
+	
+	public void setORB(Client ma){
+		refMainApplication = ma;
+	}
+
+	public void showErrorMessage(String s) {
+		lblErrorMessage.setVisible(true);
+		lblErrorMessage.setText(s);		
+	}
+		
+	@FXML
+	public void onCboxNeuAnmeldungClick(Event e){
+		neuAnmeldung = cboxNeuAnmeldung.isSelected();
+		System.out.println(neuAnmeldung);
+	}
+	
+	@FXML
+	public void onBtnAusfuehrenClick(Event e){
+		if(neuAnmeldung == false) {
+			Benutzer ben = new Benutzer(txtUserId.getText(),txtPasswort.getText());
+			refMainApplication.benutzerLoginLokal(ben);
+		} else {
+			refMainApplication.neuAnmeldungLokal();
+		}
+	}
+
+	@FXML
+	public void ontxtPasswortChange(Event e){
+		lblErrorMessage.setVisible(false);
+	}
+}
